@@ -10,10 +10,10 @@ def index(request):
 	p2 = pagina.render()
 	return HttpResponse(p2)
 
-def login(request):
-	pagina = get_template('registration/login.html')
+"""def login(request):
+	pagina = get_template('index.html')
 	p2 = pagina.render()
-	return HttpResponse(p2)
+	return HttpResponse(p2)"""
 
 #def test1 (request):
 	#mypath = os.getcwd()

@@ -134,5 +134,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #AUTH_USER_MODEL = 'ciaPago.Comunero'
 
-logout_redirect_url = '/'
-login_redirect_url = 'index/'
+#logout_redirect_url = '/'
+#login_redirect_url = 'index/'

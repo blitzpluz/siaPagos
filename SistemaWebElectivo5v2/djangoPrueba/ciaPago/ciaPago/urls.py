@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ciaPago.views import index, login
+from ciaPago.views import index
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.conf.urls import include
@@ -30,10 +30,10 @@ def home(request):
 
 urlpatterns = [
 	#url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-	url(r'^$', RedirectView.as_view(url='index/login', permanent=False), name='login'),
+	#url(r'^$', RedirectView.as_view(url='index/login', permanent=False), name='login'),
     path('admin/', admin.site.urls),
-    path('inicio/', index),
-    path('login/', login),
     path('index/', include('django.contrib.auth.urls')),
+    #path('inicio/', index),
+    path('login/', index),
     path('accounts/profile/', home),
 ]
