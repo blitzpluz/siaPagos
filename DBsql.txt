@@ -1,0 +1,29 @@
+CREATE TABLE comunero (
+	rut varchar(30) NOT NULL,
+	password varchar(256) NOT NULL,
+	telefono int,
+	email varchar(256),
+	calle varchar(256),
+	ciudad varchar(256),
+	numeroCalle int,
+	comuna varchar(256),
+	ubicacion varchar(256),
+	tipo int,
+	PRIMARY KEY (rut)
+);
+
+CREATE TABLE cuotasSociales (
+	idCuota varchar(256) NOT NULL,
+	valor int NOT NULL,
+	fechaEmicion varchar(256) NOT NULL,
+	fechaVencimiento varchar(256) NOT NULL,
+	estadoCuota int NOT NULL,
+	fk_rut varchar(256) NOT NULL,
+	fk_idTransaccion varchar(256),
+	fk_idCasub3 varchar(256) NOT NULL,
+	PRIMARY KEY (idCuota),
+	FOREIGN KEY (fk_rut) REFERENCES comunero(rut),
+	FOREIGN KEY (fk_idTransaccion) REFERENCES pagos(idTransaccion),
+	FOREIGN KEY (fk_idCasub3) REFERENCES pozoAsociado(idCasub)
+);
+

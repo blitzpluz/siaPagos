@@ -1,0 +1,65 @@
+CREATE TABLE comunero (
+	rut varchar(30) NOT NULL,
+	password varchar(256) NOT NULL,
+	telefonoCelular1 int,
+	telefonoCelular2 int,
+	telefonoCelular3 int,
+	telefonoFijo int,
+	email1 varchar(256),
+	email2 varchar(256),
+	calle varchar(256),
+	ciudad varchar(256),
+	numeroCalle int,
+	comuna varchar(256),
+	ubicacion varchar(256),
+	tipo int,
+	PRIMARY KEY (rut)
+);
+
+CREATE TABLE pagos (
+	idTransaccion varchar(256) NOT NULL,
+	fecha varchar(256) NOT NULL,
+	valor int NOT NULL,
+	PRIMARY KEY (idTransaccion)
+);
+
+CREATE TABLE pozoAsociado (
+	idCasub varchar(256) NOT NULL,
+	coordenadaEste float NOT NULL,
+	coordenadaNorte float NOT NULL,
+	caudal float NOT NULL,
+	PRIMARY KEY (idCasub)
+);
+
+CREATE TABLE cuotasSociales (
+	idCuota varchar(256) NOT NULL,
+	valor int NOT NULL,
+	fechaEmicion varchar(256) NOT NULL,
+	fechaVencimiento varchar(256) NOT NULL,
+	estadoCuota int NOT NULL,
+	fk_rut varchar(256) NOT NULL,
+	fk_idTransaccion varchar(256),
+	fk_idCasub3 varchar(256) NOT NULL,
+	PRIMARY KEY (idCuota),
+	FOREIGN KEY (fk_rut) REFERENCES comunero(rut),
+	FOREIGN KEY (fk_idTransaccion) REFERENCES pagos(idTransaccion),
+	FOREIGN KEY (fk_idCasub3) REFERENCES pozoAsociado(idCasub)
+);
+
+CREATE TABLE pago_pozo (
+	idPagoPozo INTEGER,
+	fk_idTransaccion2 varchar(256) NOT NULL,
+	fk_idCasub2 varchar(256) NOT NULL,
+	PRIMARY KEY (idPagoPozo  AUTOINCREMENT),
+	FOREIGN KEY (fk_idTransaccion2) REFERENCES pagos(idTransaccion),
+	FOREIGN KEY (fk_idCasub2) REFERENCES pozoAsociado(idCasub)
+);
+
+CREATE TABLE derechoPozo (
+	idDerecho INTEGER,
+	fk_rut varchar(256) NOT NULL,
+	fk_idCasub varchar(256) NOT NULL,
+	PRIMARY KEY (idDerecho AUTOINCREMENT),
+	FOREIGN KEY (fk_rut) REFERENCES comunero(idTransaccion),
+	FOREIGN KEY (fk_idCasub) REFERENCES pozoAsociado(idCasub)
+);
