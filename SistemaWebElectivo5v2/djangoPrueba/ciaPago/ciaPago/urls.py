@@ -16,24 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ciaPago.views import index
-from django.contrib.auth import views as auth_views
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views
+#from django.contrib.auth.decorators import login_required
 from django.conf.urls import include
 from django.http import HttpResponse
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
 from django.views.generic.base import RedirectView
-@login_required
+#@login_required
 
 def home(request):
 	return HttpResponse('hola mundo')
 
 urlpatterns = [
-	#url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-	#url(r'^$', RedirectView.as_view(url='index/login', permanent=False), name='login'),
-    path('admin/', admin.site.urls),
+	url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
+	#url(r'^$', RedirectView.as_view(url='index/login/', permanent=False), name='login'),
+	path('index/login/', views.LoginView.as_view(template_name="index.html"), name='login'),
+	path('admin/', admin.site.urls),
     path('index/', include('django.contrib.auth.urls')),
-    #path('inicio/', index),
-    path('login/', index),
     path('accounts/profile/', home),
 ]

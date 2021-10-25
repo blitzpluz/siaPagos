@@ -16,6 +16,8 @@
 
 		<link rel="stylesheet" href="{% static 'CSS/styles.css' %}">
 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 		<title>Inicio</title>
 	</head>
 
@@ -69,65 +71,69 @@
 								<!--forma inicio sesion-->
 								{% block content %}
 
-								{% if form.errors %}
-									<div class="alert alert-danger alert-dismissible fade show" role="alert">
-								 		<b>Usuario o contraseña incorrecto</b>
-								 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-									</div>
-								{% endif %}
+									{% if form.errors %}
+										
+										{% block js_block %}
 
-								{% if next %}
-								    {% if user.is_authenticated %}
-								    <p>Your account doesn't have access to this page. To proceed,
-								    please login with an account that has access.</p>
-								    {% else %}
-								    <p>Please login to see this page.</p>
-								    {% endif %}
-								{% endif %}
-
-								<form action="{% url 'login' %}" method="POST">
-									{% csrf_token %}
-									<fieldset style="margin-top: 5px !important;" class="scheduler-border">
-										<legend align="center">Iniciar sesión</legend>
-										<div style="height: 25px;" class="col-md-12"></div>
-
-										<div class="form-group col-md-12">
-											<label for="id_username">Nombre de usuario</label>
-
-											<div class="input-group input-group-lg" id='username'>
-												 
-												<span class="input-group-text" id="sizing-addon1">
-													<img src="{% static 'assets/user_icon.png' %}"></img>
-												</span>
-												<input id="id_username" name="username" type="text" class="form-control">
-														
-											</div>
-
-										</div>
-										<div class="form-group col-md-12" >
-											<label for="id_password">Contraseña</label>
-
-											<div class="input-group input-group-lg" id="password">
-												<span class="input-group-text" id="sizing-addon1">
-													<img src="{% static 'assets/pass_icon.png' %}"></img>
-												</span>
-												<input id="id_password" name="password" type="password" class="form-control">
-														
-											</div>
-													
-										</div>
-										<div style="height: 35px;" class="col-md-12"></div>
-										<div class="form-group row">
-											<div class="col text-center">
-												<button type="submit" class="btn btn-primary">Ingresar</button>
-											</div>
-										</div>
-										<div style="height: 20px;" class="col-md-12"></div>
-												
-										<div style="height: 20px;" class="col-md-12"></div>
-									</fieldset>
+											<script type="text/javascript">
+												$(window).on('load', function(){
+													$('#inicioSesion').removeClass('fade');
+													$('#inicioSesion').modal('show');
+													$('#inicioSesion').addClass('fade');
+												});
+											</script>
 											
-								</form>
+										{% endblock %}
+
+										<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									 		<b>Usuario o contraseña incorrecto</b>
+									 		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+										</div>
+									{% endif %}
+
+									<form action="{% url 'login' %}" method="POST">
+										{% csrf_token %}
+										<fieldset style="margin-top: 5px !important;" class="scheduler-border">
+											<legend align="center">Iniciar sesión</legend>
+											<div style="height: 25px;" class="col-md-12"></div>
+
+											<div class="form-group col-md-12">
+												<label for="id_username">Nombre de usuario</label>
+
+												<div class="input-group input-group-lg" id='username'>
+													 
+													<span class="input-group-text" id="sizing-addon1">
+														<img src="{% static 'assets/user_icon.png' %}"></img>
+													</span>
+													<input id="id_username" name="username" type="text" class="form-control">
+															
+												</div>
+
+											</div>
+											<div class="form-group col-md-12" >
+												<label for="id_password">Contraseña</label>
+
+												<div class="input-group input-group-lg" id="password">
+													<span class="input-group-text" id="sizing-addon1">
+														<img src="{% static 'assets/pass_icon.png' %}"></img>
+													</span>
+													<input id="id_password" name="password" type="password" class="form-control">
+															
+												</div>
+														
+											</div>
+											<div style="height: 35px;" class="col-md-12"></div>
+											<div class="form-group row">
+												<div class="col text-center">
+													<button type="submit" class="btn btn-primary">Ingresar</button>
+												</div>
+											</div>
+											<div style="height: 20px;" class="col-md-12"></div>
+													
+											<div style="height: 20px;" class="col-md-12"></div>
+										</fieldset>
+												
+									</form>
 
 								{% endblock %}
 								<!-- fin forma -->
@@ -175,6 +181,6 @@
 
 		<!-- sripts -->
 		<script src="{% static 'JS/bootstrap.bundle.min.js' %}"></script>
-
+		
 	</body>
 </html>
